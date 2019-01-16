@@ -1,0 +1,22 @@
+#!/bin/bash
+TIMEFORMAT='%3R'
+PATHTOPIG="../pig-0.17.0/bin/pig"
+PATHTOSCRIPT="../pigPlayGround/scripts"
+PATHTODATA="$1"
+
+cp "$PATHTODATA" data/curGraph.txt
+TIMEDATA="$( (time $PATHTOPIG -x local "$PATHTOSCRIPT"/prepData.pig) 2>&1 | tail -1)"
+
+TIMEITER="$( (time $PATHTOPIG -x local "$PATHTOSCRIPT"/pageRank.py) 2>&1 | tail -1)"
+
+
+TIMETOT="$(echo $TIMEITER+$TIMEDATA | bc)"
+
+rm data/curGraph.txt
+
+echo "$TIMEDATA $TIMEITER $TIMETOT" > res.log
+RESDIR="results_${PATHTODATA}_$2"
+mkdir -p "$RESDIR"
+mv out "$RESDIR"
+mv res.log "$RESDIR"
+mv data/pagerank_data_simple "$RESDIR"

@@ -1,0 +1,15 @@
+#!/bin/bash
+TIMEFORMAT='%3R'
+PATHTOSP="../spark-2.4.0-bin-hadoop2.7/bin/run-example"
+PATHTOSCRIPT="../pigPlayGround/scripts"
+
+PATHTODATA="data/graphsPageRank"
+
+for file in $(ls $PATHTODATA); do
+    for id in $(seq 1 3); do
+        echo "starting scripts/execSpark $PATHTODATA/$file $id"
+        mkdir "results_data/Spark/${file}_$id"
+        TIMETOT=$( (time "$PATHTOSP" JavaPageRank $PATHTODATA/$file 10 > "results_data/Spark/${file}_$id/logSpark.log") 2>&1 )
+        echo "$TIMETOT" > "results_data/Spark/${file}_$id/res.log"
+    done
+done
