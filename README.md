@@ -5,11 +5,13 @@ Comparison of Spark and Pig on PageRank
 
 Using PageRank implementation offered as [example](https://github.com/apache/spark/blob/master/examples/src/main/java/org/apache/spark/examples/JavaPageRank.java).
 
-*Will change to [dataFu's](https://datafu.apache.org/) if I can compile it*
+*Will change to the normal one*
 
 # Pig
 
 Using PageRank available [here](https://hortonworks.com/blog/pagerank-implementation-in-pig/). Modified so I could use the same datasources as Spark.
+
+*Will change to [dataFu's](https://datafu.apache.org/) if I can compile it*
 
 # Datas
 
